@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>法師最佳補水計算機</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 650px; margin: auto; }
+    label, input, select { display: block; margin: 10px 0; }
+    input[type="number"], select { width: 100%; padding: 5px; }
+    .result { margin-top: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h2>法師最佳補水計算機</h2>
+
+  <label>怪物攻擊傷害：<input type="number" id="damage" value="1400"></label>
+  <label>魔心防禦等級 (1~20):
+    <input type="number" id="skillLevel" value="20" min="1" max="20">
+  </label>
+  <label>HP 藥水（例如鰻魚1000）：<input type="number" id="hpRecoverValue" value="1000"></label>
+  <label>MP 藥水（例如活水300）：<input type="number" id="mpPotionValue" value="300"></label>
+  <label>HP 最大值：<input type="number" id="maxHP" value="1438"></label>
+  <label>MP 最大值：<input type="number" id="maxMP" value="4656"></label>
+
+  <button onclick="calculate()">計算最佳補藥百分比</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const skillConversionRates = [
+      0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40,
+      44, 48, 52, 56, 60, 64, 68, 72, 76, 80
+    ];
+
+    function calculate() {
+      const dmg = parseInt(document.getElementById("damage").value);
+      const level = parseInt(document.getElementById("skillLevel").value);
+      const hpTarget = parseInt(document.getElementById("hpRecoverValue").value);
+      const mpPotion = parseInt(document.getElementById("mpPotionValue").value);
+      const maxHP = parseInt(document.getElementById("maxHP").value);
+      const maxMP = parseInt(document.getElementById("maxMP").value);
+
+      const R = skillConversionRates[level] / 100.0;
+      const hpLoss = hpTarget;
+      const mpRequired = dmg - hpLoss;
+
+      const hpPercent = (hpLoss / maxHP) * 100;
+      const mpPercent = (mpRequired / maxMP) * 100;
+      const mpNeedBottles = mpRequired / mpPotion;
+
+      document.getElementById("result").innerHTML = `
+        <strong>【最佳補藥百分比】</strong><br><br>
+        ✔ 設定 HP 補藥：<b>${hpPercent.toFixed(2)}%</b><br>
+        ✔ 設定 MP 補藥：<b>${mpPercent.toFixed(2)}%</b><br>
+        ✔ MP 需要補藥累計瓶數：<b>${mpNeedBottles.toFixed(2)} 瓶</b>
+      `;
+    }
+  </script>
+</body>
+</html>
