@@ -17,12 +17,12 @@
   <label>魔心防禦等級 (1~20):
     <input type="number" id="skillLevel" value="20" min="1" max="20">
   </label>
-  <label>HP 藥水（例如鰻魚1000）：<input type="number" id="hpRecoverValue" value="1000"></label>
-  <label>MP 藥水（例如活水300）：<input type="number" id="mpPotionValue" value="300"></label>
-  <label>HP 最大值：<input type="number" id="maxHP" value="1438"></label>
-  <label>MP 最大值：<input type="number" id="maxMP" value="4656"></label>
+  <label>HP 藥水（例如鰻魚請輸入1000）：<input type="number" id="hpRecoverValue" value="1000"></label>
+  <label>MP 藥水（例如活水請輸入300）：<input type="number" id="mpPotionValue" value="300"></label>
+  <label>你的 HP 最大值：<input type="number" id="maxHP" value="1438"></label>
+  <label>你的 MP 最大值：<input type="number" id="maxMP" value="4656"></label>
 
-  <button onclick="calculate()">計算最佳補藥百分比</button>
+  <button onclick="calculate()">計算最佳補水百分比</button>
 
   <div class="result" id="result"></div>
 
@@ -49,9 +49,9 @@
       const mpNeedBottles = mpRequired / mpPotion;
 
       document.getElementById("result").innerHTML = `
-        <strong>【最佳補藥百分比】</strong><br><br>
-        ✔ 設定 HP 補藥：<b>${hpPercent.toFixed(2)}%</b><br>
-        ✔ 設定 MP 補藥：<b>${mpPercent.toFixed(2)}%</b><br>
+        <strong>【最佳補水百分比】</strong><br><br>
+        ✔ 設定 HP 補水%數：<b>${hpPercent.toFixed(2)}%</b><br>
+        ✔ 設定 MP 補水%數：<b>${mpPercent.toFixed(2)}%</b><br>
         ✔ MP 需要補藥累計瓶數：<b>${mpNeedBottles.toFixed(2)} 瓶</b>
       `;
     }
